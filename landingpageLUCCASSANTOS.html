@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário com jQuery e Bootstrap</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <style>
+        body {
+            background-color: aquamarine;
+        }
+
+        .preco {
+            color: green;
+        }
+        .alerta{
+            color:red;
+        }
+
+        .container-flex {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <div id="carouselExample" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="controle.png" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="controle2.png" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="controle3.png" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col">
+
+                            <h3 class=" mb-4 text-center">Controle Xbox Wireless Series X|S Carbon black</h3>
+                            <div class="text-center">
+
+                                <p>Eleve sua experiência de jogo com o Controle de Xbox Carbon, um acessório que
+                                    combina
+                                    design sofisticado, conforto excepcional e tecnologia de ponta. Com seu
+                                    acabamento
+                                    em
+                                    carbono, ele oferece um visual moderno e premium, perfeito para quem busca
+                                    estilo e
+                                    funcionalidade.</p>
+                                <h1 class="preco">R$ 348,00</h1>
+                                <p class="alerta">Pagamento somente no boleto que será enviado ao email cadastrado!</p>
+                            </div>
+
+                        </div>
+                        <form id="formCadastro">
+                            <div id="msgErro" class="alert alert-danger d-none"></div>
+                            <div id="msgSucesso" class="alert alert-success d-none"></div>
+                            <div class="text-center">
+                                <p>Preencha aqui com as suas informações para efetuar a compra</p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="campocpf">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telefone">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="endereco" class="form-label">Endereço</label>
+                                <input type="text" class="form-control" id="endereco">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="mensagem" class="form-label">Mensagem</label>
+                                <input type="text" class="form-control" id="mensagem">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Comprar</button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+
+<script>
+    $(document).ready(function () {
+        var $seuCampoCpf = $("#campocpf");
+        $seuCampoCpf.mask('000.000.000-00', { reverse: true });
+    });
+    $(document).ready(function () {
+        $("#telefone").inputmask({
+            mask: ["(99) 9999-9999", "(99) 99999-9999",],
+            keepStatic: true
+        });
+    });
+    function TestaCPF(cpf) {
+
+        let limpo = "";
+        for (let i = 0; i < cpf.length; i++) {
+            if (cpf[i] >= "0" && cpf[i] <= "9") {
+                limpo += cpf[i];
+            }
+        }
+
+        cpf = limpo;
+
+        if (cpf.length !== 11) return false;
+
+        let iguais = true;
+        for (let i = 1; i < cpf.length; i++) {
+            if (cpf[i] !== cpf[0]) {
+                iguais = false;
+                break;
+            }
+        }
+        if (iguais) return false;
+
+        let soma = 0;
+        let resto;
+
+        for (let i = 1; i <= 9; i++) {
+            soma += parseInt(cpf[i - 1]) * (11 - i);
+        }
+
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf[9])) return false;
+
+        soma = 0;
+        for (let i = 1; i <= 10; i++) {
+            soma += parseInt(cpf[i - 1]) * (12 - i);
+        }
+
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf[10])) return false;
+
+        return true;
+    }
+
+
+
+    $("#formCadastro").on("submit", function (e) {
+        e.preventDefault();
+
+        let nome = $("#nome").val().trim();
+        let cpf = $("#campocpf").val().trim();
+        let email = $("#email").val().trim();
+        let celular = $("#telefone").val().trim();
+        let mensagem = $("#mensagem").val().trim();
+
+        if (nome === "" || cpf === "" || email === "" || celular === "" || mensagem === "") {
+            $("#msgErro").text("Preencha todos os campos!").removeClass("d-none");
+            $("#msgSucesso").addClass("d-none");
+            return;
+        }
+
+        if (nome.length > 100) {
+            $("#msgErro").text("Seu nome está muito grande, abrevie seus sobrenomes!").removeClass("d-none");
+            $("#msgSucesso").addClass("d-none");
+            return;
+
+        }
+
+        if (mensagem.length > 100) {
+            $("#msgErro").text("Sua mensagem está muito grande, seja mais direto!").removeClass("d-none");
+            $("#msgSucesso").addClass("d-none");
+            return;
+
+        }
+
+        if (endereco.length > 250) {
+            $("#msgErro").text("Seu endereço está muito grande, verifique se está escrito corretamente!").removeClass("d-none");
+            $("#msgSucesso").addClass("d-none");
+            return;
+
+        }
+
+        if (!TestaCPF(cpf)) {
+            $("#msgErro").text("CPF inválido, insira um CPF válido!").removeClass("d-none");
+            $("#msgSucesso").addClass("d-none");
+            return;
+        }
+
+        $("#msgErro").addClass("d-none");
+        $("#msgSucesso")
+            .text("Compra realizada com sucesso!")
+            .removeClass("d-none");
+    });
+</script>
+
+</body>
+
+</html>
